@@ -2,8 +2,6 @@ class Solution {
 public:
     int maxSelectedElements(vector<int>& nums) {
         sort(nums.begin(),nums.end());
-        for(int i=0;i<nums.size();i++) cout<<nums[i]<<" ";
-        cout<<endl;
         // int s = 1e6+3;
         int dp[int(1e6+3)]={0};
         int ans=1;
