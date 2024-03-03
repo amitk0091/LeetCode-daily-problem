@@ -11,6 +11,7 @@ public:
                  grid[i][j]+= aux;
                 // cout<<grid[i][j]<<" ";
                  if(grid[i][j]<=k) cnt++;
+                 else break;
             }
             // cout<<endl;
         }
