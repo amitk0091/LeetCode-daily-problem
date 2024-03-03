@@ -19,6 +19,24 @@ public:
         return head;
     }
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        return traverseList(head,n);
+        // return traverseList(head,n);
+
+        int len =0;
+        ListNode* temp = head;
+        while(temp){
+            len++;
+            temp=temp->next;
+        }
+
+        int disFromStart = len - n ;
+        ListNode* pre = new ListNode(-1);
+        pre->next = head;
+        temp = pre;
+        
+        while(disFromStart--){
+            temp=temp->next;
+        } 
+        temp->next = temp->next->next;
+        return pre->next;
     }
 };
