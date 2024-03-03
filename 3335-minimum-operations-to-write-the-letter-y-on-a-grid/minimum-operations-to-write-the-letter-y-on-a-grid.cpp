@@ -1,8 +1,8 @@
 class Solution {
 public:
     int minimumOperationsToWriteY(vector<vector<int>>& grid) {
-        vector<int> cnty(3);
-            vector<int> remain(3);
+        int cnty[3] ={0};
+        int remain[3] ={0};
         int n = grid.size();
         for(int i=0;i<grid.size();i++){
             for(int j=0;j<grid[0].size();j++){
