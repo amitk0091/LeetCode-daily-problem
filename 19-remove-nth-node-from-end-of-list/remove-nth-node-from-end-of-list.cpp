@@ -10,14 +10,14 @@
  */
 class Solution {
 public:
-    ListNode* traverseList(ListNode* head,int& n){
-        if(head==NULL) return NULL;
-        ListNode* next = traverseList(head->next,n);
-        n--;
-        if(n==0) return next;
-        head->next = next;
-        return head;
-    }
+    // ListNode* traverseList(ListNode* head,int& n){
+    //     if(head==NULL) return NULL;
+    //     ListNode* next = traverseList(head->next,n);
+    //     n--;
+    //     if(n==0) return next;
+    //     head->next = next;
+    //     return head;
+    // }
     ListNode* removeNthFromEnd(ListNode* head, int n) {
         // return traverseList(head,n);
 
@@ -32,7 +32,7 @@ public:
         ListNode* pre = new ListNode(-1);
         pre->next = head;
         temp = pre;
-        
+
         while(disFromStart--){
             temp=temp->next;
         } 
