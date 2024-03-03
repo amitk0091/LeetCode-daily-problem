@@ -60,7 +60,6 @@ public:
         dfs(root, mod, vis, ans, adj, upper,sumNodes);
 
         for (int i = 0; i < n; i++) {
-            cout<<upper[i]<<" "<<ans[i]<<endl;
             if(upper[i]>0) ans[i]+= sumNodes[i]*upper[i];
         }
         return ans;
