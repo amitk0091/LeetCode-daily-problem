@@ -32,28 +32,15 @@ public:
     bool checkValidString(string s) {
         //  return help(0, 0, s); 
 
-        int cntStar=0,cnt=0,n =s.length();
+        int cntClose=0,cnt=0,n =s.length();
         for(int i=0;i<n;i++){
-           if(s[i]=='(' ) cnt++;
+           if(s[i]=='(' || s[i]=='*'  ) cnt++;
            else if(s[i]==')') cnt--;
-           if(s[i]=='*') cntStar++;
-           if(cnt<0 && cnt+cntStar<0) return false;
-           else if (cnt<0){
-            cntStar+=cnt;
-            cnt=0;
-           } 
-        }
-
-        cntStar=0,cnt=0;
-        for(int i=n-1;i>=0;i--){
-           if(s[i]=='(') cnt++;
-           else if(s[i]==')') cnt--;
-           if(s[i]=='*') cntStar++;
-           if(cnt>0 && cnt-cntStar>0) return false;
-           else if (cnt>0){
-            cntStar-=cnt;
-            cnt=0;
-           } 
+            int j = n-1-i;
+           if(s[j]==')' || s[j]=='*') cntClose++;
+           else if(s[j]=='(') cntClose--;
+ 
+           if(cnt<0 || cntClose<0) return false;
         }
         return true;
 
