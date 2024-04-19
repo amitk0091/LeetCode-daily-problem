@@ -3,7 +3,6 @@ public:
     int dx[4] = {-1,0,1,0};
     int dy[4] = {0,1,0,-1};
     void dfs(int i, int j, vector<vector<char>>& grid){
-        cout<<i<<" "<<j<<endl;
         for(int k=0;k<4;k++){
             if(i+dx[k]>=0 && i+dx[k]<grid.size() && j+dy[k]>=0 && j+dy[k]<grid[0].size() && grid[i+dx[k]][j+dy[k]]=='1'){
                 grid[i+dx[k]][j+dy[k]] ='0';
