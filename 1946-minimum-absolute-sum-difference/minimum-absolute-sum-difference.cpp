@@ -4,7 +4,7 @@ const int MOD = 1e9 + 7;
 
 class Solution {
 public:
-    pair<int, int> get_smaller_And_Equal_or_larger(vector<int>& arr, int num) {
+    pair<int, int> get_smaller_And_Equal_or_larger(vector<int>& arr, int& num) {
         int low = 0, high = arr.size() - 1, small = -1, large = -1;
         while (low <= high) {
             int mid = (low + high) / 2;
@@ -34,7 +34,6 @@ public:
         sort(nums1.begin(),nums1.end());
         ll res = sum;
         ll temp = sum;
-        cout<<"sum "<<sum<<endl;
         for(int i=0;i<nums1.size();i++){
            temp-=vt[i];
            auto p = get_smaller_And_Equal_or_larger(nums1,nums2[i]);
@@ -44,8 +43,6 @@ public:
            }
            if(p.first!=-1) extra = min(extra,(ll)(nums2[i]-p.first));
            res= min(temp+extra,res);
-           cout<<p.first<<" "<<p.second<<endl;
-           cout<<"extra "<<extra<<endl;
            temp=sum;
         }
         return res%MOD;
