@@ -1,34 +1,32 @@
 using ll = long long;
-typedef pair<int, int> pii; // pair for {distance, node}
+typedef pair<long, long> pii; // pair for {distance, node}
 
 class Solution {
 public:
-    vector<ll> dijkstra(int source, int n, vector<vector<pii>>& adj) {
-        vector<ll> dist(n, INT_MAX);
-        priority_queue<pii, vector<pii>, greater<pii>> pq; // min-priority queue
-
-        dist[source] = 0;
-        pq.push({0, source});
+    vector<ll>
+    dijkstra(ll src, ll n,
+             vector<vector<pii>>& adj) { // single source shortest path
+        vector<ll> distance(n, INT_MAX);
+        priority_queue<pair<ll, ll>, vector<pair<ll, ll>>,
+                       greater<pair<ll, ll>>>
+            pq;
+        pq.push({0, src});
+        distance[src] = 0;
 
         while (!pq.empty()) {
-            int u = pq.top().second;
+            ll node = pq.top().second;
             pq.pop();
-
-            for (auto& neighbor : adj[u]) {
-                int v = neighbor.first;
-                int weight = neighbor.second;
-
-                if (dist[v] > dist[u] + weight) {
-                    dist[v] = dist[u] + weight;
-                    pq.push({dist[v], v});
+            for (auto p1 : adj[node]) {
+                ll neigh = p1.first;
+                ll nxtDis = p1.second;
+                if (distance[neigh] > distance[node] + nxtDis) {
+                    distance[neigh] = distance[node] + nxtDis;
+                    pq.push({nxtDis + distance[node], neigh});
                 }
             }
         }
-
-        return dist;
+        return distance;
     }
-
-   
 
     vector<bool> findAnswer(int n, vector<vector<int>>& edges) {
         vector<vector<pii>> adj(n); // adjacency list
@@ -39,13 +37,17 @@ public:
         }
 
         vector<bool> vis(n, false);
-        vector<ll> d1 = dijkstra(0, n, adj);
-        vector<ll> d2 = dijkstra(n-1,n,adj);
+        vector<ll> d1 = dijkstra(0LL, (ll)n, adj);
+        vector<ll> d2 = dijkstra((ll)(n - 1), (ll)n, adj);
         int cost = d1[n - 1];
         vector<bool> ans(edges.size(), false);
-        if(cost == INT_MAX) return ans;
+        if (cost == INT_MAX)
+            return ans;
         for (int i = 0; i < edges.size(); i++) {
-            if((d1[edges[i][0]] + d2[edges[i][1]] + edges[i][2] ==d1[n-1]) || (d1[edges[i][1]] + d2[edges[i][0]] + edges[i][2] ==d1[n-1])  ){
+            if ((d1[edges[i][0]] + d2[edges[i][1]] + edges[i][2] ==
+                 d1[n - 1]) ||
+                (d1[edges[i][1]] + d2[edges[i][0]] + edges[i][2] ==
+                 d1[n - 1])) {
                 ans[i] = true;
             }
         }
