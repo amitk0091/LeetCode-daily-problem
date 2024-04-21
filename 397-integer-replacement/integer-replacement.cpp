@@ -8,7 +8,16 @@ public:
         if(n%2==0) return 1+help(n/2);
         return m[n] = 1+min(help(n+1),help(n-1));
     }
-    int integerReplacement(int n) {
-        return help(n);
+    int integerReplacement(int n1) {
+        // return help(n);
+        int cnt=0;
+        ll n = n1;
+        while(n>1){
+            if(n%2==0) n/=2;
+            else if((n+1)%4==0 && (n+1)!=4) n+=1;
+            else n-=1;
+            cnt++;
+        }
+        return cnt;
     }
 };
