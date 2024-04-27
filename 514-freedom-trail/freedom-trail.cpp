@@ -26,18 +26,17 @@ public:
         vector<int> curr(ring.length(), 0);
         for (int i = key.length() - 1; i >= 0; i--) {
             fill(curr.begin(), curr.end(), INT_MAX);
-            for (int prev_j = 0; prev_j < ring.length(); prev_j++) {
+            for (int pre_j = 0; pre_j < ring.length(); pre_j++) {
+                int cost = INT_MAX;
                 for (int j = 0; j < ring.length(); j++) {
                     if (ring[j] == key[i]) {
-                        int stepsBetween = abs(j - prev_j);
-                        int stepsAround = ring.length() - stepsBetween;
-                        int curCost= 1+ min(stepsBetween, stepsAround);
-                        // int curCost = min((int)abs(j - prev_j) + 1,
-                        //                   (int)(ring.length() - max(j, prev_j) +
-                        //                         min(prev_j, j) + 1));
-                        curr[prev_j] = min(curr[prev_j],curCost + prev[j]);
+                        int curCost = min((int)abs(j - pre_j) + 1,
+                                          (int)(ring.length() - max(j, pre_j) +
+                                                min(pre_j, j) + 1));
+                        cost = min(cost, curCost + prev[j]);
                     }
                 }
+                curr[pre_j] = cost;
             }
             prev = curr;
         }
