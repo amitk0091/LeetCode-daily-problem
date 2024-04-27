@@ -27,18 +27,33 @@ public:
         }
     }
     string largestTimeFromDigits(vector<int>& arr) {
-        string st;
-        help("",arr);
-        if(hmx!=-1) {
-            string hh = to_string(hmx);
-            if(hh.length()==1) hh= "0"+hh;
-            st+=hh;
-            st+=":";
-            string mm = to_string(mmx);
-            if(mm.length()==1) mm= "0"+mm;
-            st+=mm;
-            return st;
-        }
+        // string st;
+        // help("", arr);
+        // if (hmx != -1) {
+        //     string hh = to_string(hmx);
+        //     if (hh.length() == 1)
+        //         hh = "0" + hh;
+        //     st += hh;
+        // st += ":";
+        // string mm = to_string(mmx);
+        // if (mm.length() == 1)
+        //         mm = "0" + mm;
+        //     st += mm;
+        //     return st;
+        // }
+        // return "";
+
+        auto isValid = [](const string& h, const string& m) {
+            return (h < "24" && m < "60");
+        };
+
+        sort(arr.begin(), arr.end(), greater<int>());
+        do {
+            string h = to_string(arr[0]) + to_string(arr[1]);
+            string m = to_string(arr[2]) + to_string(arr[3]);
+            if (isValid(h, m))
+                return h + ":" + m;
+        } while (prev_permutation(arr.begin(), arr.end()));
         return "";
     }
 };
