@@ -14,10 +14,8 @@ public:
         fill_n(ofreq,26,INT_MAX);
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < 26; j++) {
-                cout<<freq[i][j]<<" ";
                 ofreq[j] = min(freq[i][j], ofreq[j]);
             }
-            cout<<endl;
         }
         vector<string> ans;
         for (int i = 0; i < 26; i++) {
