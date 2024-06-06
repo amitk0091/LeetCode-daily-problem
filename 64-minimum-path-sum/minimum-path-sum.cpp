@@ -28,25 +28,28 @@ public:
         // vector<vector<int>> dp(grid.size(),vector<int>(grid[0].size(),-1));
         // return help(0,0,grid,dp);
 
-        vector<vector<int>> dp(grid.size(), vector<int>(grid[0].size(), 0));
+        vector<int> prev(grid[0].size(), 0);
+        vector<int> curr(grid[0].size(), 0);
+
         for (int i = grid.size() - 1; i >= 0; i--) {
             for (int j = grid[0].size() - 1; j >= 0; j--) {
                 if (i == grid.size() - 1 && j == grid[0].size() - 1) {
-                    dp[i][j] = grid[i][j];
+                    curr[j] = grid[i][j];
                     continue;
                 }
                 int cost = INT_MAX;
                 // possible 1
                 if (i + 1 < grid.size()) {
-                    cost = dp[i + 1][j];
+                    cost = prev[j];
                 }
                 // possible 2
                 if (j + 1 < grid[0].size()) {
-                    cost = min(cost, dp[i][j + 1]);
+                    cost = min(cost, curr[j+1]);
                 }
-                dp[i][j] = cost + grid[i][j];
+                curr[j] = cost + grid[i][j];
             }
+            prev=curr;
         }
-        return dp[0][0];
+        return prev[0];
     }
 };
