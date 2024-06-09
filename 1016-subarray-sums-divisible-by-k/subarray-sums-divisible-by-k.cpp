@@ -5,9 +5,9 @@ public:
         unordered_map<int,int> mp;
         mp[0] =1;
         for(int i=0;i<n;i++){
-            sum = (sum + nums[i]%k +k) %k;
+            sum += (nums[i]%k +k)%k;
+            sum%=k;
             cnt+=mp[sum%k];
-            // cout<<mp[sum%k]<<endl;
             mp[sum%k]++;
         }
         return cnt;
