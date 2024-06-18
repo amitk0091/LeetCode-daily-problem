@@ -15,6 +15,8 @@ public:
         return ind;
     }
     int maxProfitAssignment(vector<int>& d, vector<int>& p, vector<int>& ws) {
+        ios::sync_with_stdio(0);
+         cout.tie(0);
         int n = d.size();
         vector<pair<int,int>> dp(n);
         for(int i=0;i<n;i++){
